@@ -1,0 +1,6 @@
+craco.config.js
+node_modules
+public
+assets
+src/index.css
+tailwind.config.js

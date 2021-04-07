@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import loadable from '@loadable/component';
@@ -13,15 +13,15 @@ const Call = loadable(() => import('../containers/Call'), { fallback: <Loading /
 const history = createBrowserHistory();
 
 const Routes = () => (
-  <BrowserRouter history={history}>
+  <Router history={history}>
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/call" component={Call} />
+        <Route exact path="/:target" component={Call} />
         <Route exact path="/about" component={About} />
       </Switch>
     </Layout>
-  </BrowserRouter>
+  </Router>
 );
 
 export default Routes;

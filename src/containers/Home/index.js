@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { randomNameGenerator } from '../../utils/helpers';
+import socket from '../../utils/socket';
 
 import { actions } from '../../slice';
 
 const index = () => {
   const dispatch = useDispatch();
-
   const [tocall, setTocall] = useState();
   const username = useSelector((state) => state.username);
   useEffect(() => {
     if (!username) {
       dispatch(actions.setUsername({ username: randomNameGenerator() }));
+    } else {
+      socket.emit('vc::auth', { username });
     }
-  }, []);
+  }, [username]);
 
   return (
     <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
@@ -46,8 +48,8 @@ const index = () => {
               />
               &nbsp;
               <Link
-                className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                to={`/${tocall}`}
+                className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                to={`/call/${tocall}`}
               >
                 Go
               </Link>

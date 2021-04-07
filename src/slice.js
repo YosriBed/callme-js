@@ -17,6 +17,9 @@ const appSlice = createSlice({
       state.error = action.payload.error;
       state.loading = false;
     },
+    setUsername(state, action) {
+      state.username = action.payload.username;
+    },
   },
 });
 
